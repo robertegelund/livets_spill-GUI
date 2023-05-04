@@ -7,14 +7,14 @@ class TestVerden {
     }
 
     private static void testKonstruktoer () {
-	ControllerGOL verden = new ControllerGOL(4,5);
+	ControllerGoL verden = new ControllerGoL(4,5);
 	sjekk("Verden: genNr skal vaere 0", verden.genNr == 0);
 	
 	System.out.println("konstruktør: Alt riktig!");
     }
 
     private static void testTegn () {
-	ControllerGOL verden = new ControllerGOL(4,5);
+	ControllerGoL verden = new ControllerGoL(4,5);
 	System.out.println("tegn(): Utskrift av en Verden:");
 	verden.tegn();
 	System.out.println("tegn(): Utskrift ferdig!");
@@ -22,7 +22,7 @@ class TestVerden {
     }
 
     private static void testOppdatering () {
-	ControllerGOL verden = new ControllerGOL(3,3);
+	ControllerGoL verden = new ControllerGoL(3,3);
 	System.out.println("oppdatering(): Tester metoden gjennom 3 generasjoner");
 	verden.tegn();
 	for (int i = 1;  i <= 3;  ++i) {

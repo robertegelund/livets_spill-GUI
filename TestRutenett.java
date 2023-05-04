@@ -7,7 +7,7 @@ class TestRutenett {
     }
 
     private static void testKonstruktoerUtenRutenett() {
-	ModelGOL testRutenett = new ModelGOL(3, 5);
+	ModelGoL testRutenett = new ModelGoL(3, 5);
 
 	sjekk("testRutenett.antRader==3", testRutenett.antRader==3);
 	sjekk("testRutenett.antKolonner==5", testRutenett.antKolonner==5);
@@ -16,7 +16,7 @@ class TestRutenett {
     }
 
     private static void testFyllMedTilfeldigeCeller () {
-	ModelGOL testRutenett = new ModelGOL(10, 5);
+	ModelGoL testRutenett = new ModelGoL(10, 5);
 	testRutenett.fyllMedTilfeldigeCeller();
 
 	int antLev = 0, antDoed = 0;
@@ -39,7 +39,7 @@ class TestRutenett {
     }
 
     private static void testHentCelle () {
-	ModelGOL testRutenett = new ModelGOL(3, 5);
+	ModelGoL testRutenett = new ModelGoL(3, 5);
 	testRutenett.fyllMedTilfeldigeCeller();
 	
 	for (int rx = -1;  rx < testRutenett.antRader+1;  ++rx) {
@@ -56,7 +56,7 @@ class TestRutenett {
     }
 
     private static void testTegnRutenett () {
-	ModelGOL testRutenett = new ModelGOL(4, 4);
+	ModelGoL testRutenett = new ModelGoL(4, 4);
 	testRutenett.fyllMedTilfeldigeCeller();
 	System.out.println("testTegnRutenett(): Slik ser et 4x4 rutenett ut:");
 	testRutenett.tegnRutenett();
@@ -65,7 +65,7 @@ class TestRutenett {
     }
 
     private static void testSettNaboer () {
-	ModelGOL testRutenett = new ModelGOL(3, 3);
+	ModelGoL testRutenett = new ModelGoL(3, 3);
 	testRutenett.fyllMedTilfeldigeCeller();
 
 	testRutenett.settNaboer(0,0);
@@ -84,7 +84,7 @@ class TestRutenett {
     }
 
     private static void testKobleAlleCeller () {
-	ModelGOL testRutenett = new ModelGOL(2, 2);  // 2 x 2 rutenett
+	ModelGoL testRutenett = new ModelGoL(2, 2);  // 2 x 2 rutenett
 	testRutenett.fyllMedTilfeldigeCeller();
 	testRutenett.kobleAlleCeller();
     
@@ -96,7 +96,7 @@ class TestRutenett {
 	}
 	sjekk("antall naboer i 2x2-rutenett skal være 12", totaltAntallNaboer==12);
 
-	testRutenett = new ModelGOL(3, 3);  // 3 x 3 rutenett
+	testRutenett = new ModelGoL(3, 3);  // 3 x 3 rutenett
 	testRutenett.fyllMedTilfeldigeCeller();
 	testRutenett.kobleAlleCeller();
     
@@ -113,7 +113,7 @@ class TestRutenett {
 
     private static void testAntallLevende () {
 	// Lag et tomt rutenett:
-	ModelGOL testRutenett = new ModelGOL(3, 3);
+	ModelGoL testRutenett = new ModelGoL(3, 3);
 	for (int rx = 0;  rx < testRutenett.antRader;  ++rx) {
 	    for (int kx = 0;  kx < testRutenett.antKolonner;  ++kx) {
 		testRutenett.rutene[rx][kx] = new Celle();

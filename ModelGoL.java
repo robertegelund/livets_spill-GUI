@@ -1,8 +1,8 @@
-class ModelGOL {
+class ModelGoL {
     int antRader, antKolonner;
     Celle[][] rutene;
 
-    ModelGOL(int antRader, int antKolonner) {
+    ModelGoL(int antRader, int antKolonner) {
         this.antRader = antRader;
         this.antKolonner = antKolonner;
         rutene = new Celle[antRader][antKolonner];

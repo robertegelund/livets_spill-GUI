@@ -1,6 +1,6 @@
 class GameOfLife {
     public static void main(String[] args) {
-        ControllerGOL verden = new ControllerGOL(8, 12);
+        ControllerGoL verden = new ControllerGoL(8, 12);
 
         // Tegner 0-te generasjon
         verden.tegn();

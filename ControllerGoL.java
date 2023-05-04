@@ -1,9 +1,11 @@
-class ControllerGOL {
-    ModelGOL rutenett;
+class ControllerGoL {
+    ModelGoL rutenett;
+    ViewGoL view;
     int genNr = 0;
     
-    ControllerGOL(int antRader, int antKolonner) {
-        rutenett = new ModelGOL(antRader, antKolonner);
+    ControllerGoL(int antRader, int antKolonner) {
+        rutenett = new ModelGoL(antRader, antKolonner);
+        view = new ViewGoL(this);
         rutenett.fyllMedTilfeldigeCeller();
         rutenett.kobleAlleCeller();
     }
