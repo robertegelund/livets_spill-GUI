@@ -4,10 +4,32 @@ import javax.swing.*;
 
 
 public class ViewGoL {
-    private controller = new ControllerGoL();
+    ControllerGoL controller;
+    JFrame vindu;
 
-    public ViewGoL() {
-
+    ViewGoL(ControllerGoL controller) {
+        this.controller = controller;
+        vindu = opprettVindu("Game of Life");
     }
+
+    public JFrame opprettVindu(String navn) {
+        try {
+            UIManager.setLookAndFeel(
+                UIManager.getCrossPlatformLookAndFeelClassName()
+            );
+        } catch(Exception e) {
+            System.exit(1);
+        }
+
+        JFrame vindu = new JFrame(navn);
+        vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        vindu.pack();
+        vindu.setLocationRelativeTo(null);
+        vindu.setVisible(true);
+        return vindu;
+    }
+
+    
 
 }
