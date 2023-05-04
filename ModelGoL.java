@@ -43,22 +43,6 @@ class ModelGoL {
         }
     }
 
-    public void tegnRutenett() {
-        for(int rad = 0; rad < antRader; rad++) {
-            String ramme = "+";
-            String tegn = "|";
-            for(int kol = 0; kol < antKolonner; kol++) {
-                ramme += "---+";
-                tegn  += " " + rutene[rad][kol].hentStatusTegn() + " |";
-            }
-            System.out.println(ramme);
-            System.out.println(tegn);
-            if(rad == antRader-1) {
-                System.out.println(ramme);
-            }
-        }
-    }
-
     public void settNaboer(int rad, int kol) {
         Celle celle = hentCelle(rad, kol);
         

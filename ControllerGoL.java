@@ -1,8 +1,8 @@
 class ControllerGoL {
-    ModelGoL model;
-    ViewGoL view;
-    int genNr = 0;
-    
+    private ModelGoL model; ViewGoL view;
+    private int genNr = 0;
+    private boolean spilletKjoerer = false;
+
     ControllerGoL(int antRader, int antKolonner) {
         model = new ModelGoL(antRader, antKolonner);
         model.fyllMedTilfeldigeCeller();
@@ -18,12 +18,6 @@ class ControllerGoL {
         return model.antallLevende();
     }
 
-    public void tegn() {
-        System.out.println("\nGenerasjon nr. " + genNr);
-        model.tegnRutenett();
-        System.out.println("Det er " + model.antallLevende() + " levende celler.\n");
-    }
-
     public void oppdatering() {
         for(int rad = 0; rad < model.antRader; rad++) {
             for(int kol = 0; kol < model.antKolonner; kol++) {
@@ -33,5 +27,32 @@ class ControllerGoL {
             }
         }
         genNr++;
+        view.oppdaterAntLevende();
+        view.oppdaterRutenett(); 
     }
+    
+    public void startSpillet() {
+        spilletKjoerer = true;
+        new Thread(new BrettOppdaterer()).start();
+    }
+
+    public void avsluttSpillet() {
+        spilletKjoerer = false;
+        System.exit(0);
+    }
+    class BrettOppdaterer implements Runnable {
+        @Override
+        public void run() {
+            while(spilletKjoerer) {
+                oppdatering();
+                try {
+                    Thread.sleep(2000);
+                } catch(InterruptedException ie) {
+                    System.out.println("[ERROR] Brettoppdatereren ble avbrutt. Spillet avsluttes.");
+                    System.exit(1);
+                }
+            }
+        }
+    }
+
 }
