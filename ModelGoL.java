@@ -104,4 +104,8 @@ class ModelGoL {
         }
         return antallLevende;
     }
+
+    public Celle[][] hentRutene() {
+        return rutene;
+    }
 }

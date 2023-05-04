@@ -1,25 +1,33 @@
 class ControllerGoL {
-    ModelGoL rutenett;
+    ModelGoL model;
     ViewGoL view;
     int genNr = 0;
     
     ControllerGoL(int antRader, int antKolonner) {
-        rutenett = new ModelGoL(antRader, antKolonner);
-        view = new ViewGoL(this);
-        rutenett.fyllMedTilfeldigeCeller();
-        rutenett.kobleAlleCeller();
+        model = new ModelGoL(antRader, antKolonner);
+        model.fyllMedTilfeldigeCeller();
+        model.kobleAlleCeller();
+        view = new ViewGoL(this, antRader, antKolonner);
+    }
+
+    public Celle[][] hentRutene() {
+        return model.hentRutene();
+    }
+
+    public int antallLevende() {
+        return model.antallLevende();
     }
 
     public void tegn() {
         System.out.println("\nGenerasjon nr. " + genNr);
-        rutenett.tegnRutenett();
-        System.out.println("Det er " + rutenett.antallLevende() + " levende celler.\n");
+        model.tegnRutenett();
+        System.out.println("Det er " + model.antallLevende() + " levende celler.\n");
     }
 
     public void oppdatering() {
-        for(int rad = 0; rad < rutenett.antRader; rad++) {
-            for(int kol = 0; kol < rutenett.antKolonner; kol++) {
-                Celle celle = rutenett.hentCelle(rad, kol);
+        for(int rad = 0; rad < model.antRader; rad++) {
+            for(int kol = 0; kol < model.antKolonner; kol++) {
+                Celle celle = model.hentCelle(rad, kol);
                 celle.tellLevendeNaboer();
                 celle.oppdaterStatus();
             }

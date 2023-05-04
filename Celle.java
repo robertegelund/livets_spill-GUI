@@ -16,9 +16,9 @@ class Celle{
         return levende;
     }
 
-    public char hentStatusTegn() {
+    public String hentStatusTegn() {
         // Bruker ternary operator til if-sjekk
-        return levende ? 'O' : '.';
+        return levende ? "O" : ".";
     }
 
     public void leggTilNabo(Celle nabo) {
