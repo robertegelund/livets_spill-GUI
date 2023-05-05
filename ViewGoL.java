@@ -50,7 +50,7 @@ public class ViewGoL {
 
     private void opprettAllePaneler() {
         hovedpanel = lagPanelMedBorderLayout();
-        statuspanel = lagPanelMedGridLayout(1, 6);
+        statuspanel = lagPanelMedGridLayout(1, 4);
         rutenett = lagPanelMedGridLayout(antRad, antKol);
         hovedpanel.add(statuspanel, BorderLayout.NORTH);
         hovedpanel.add(rutenett, BorderLayout.SOUTH);
@@ -75,10 +75,8 @@ public class ViewGoL {
         start = new JButton("Start"); avslutt = new JButton("Avslutt");
         start.addActionListener(new startHaandtering());
         avslutt.addActionListener(new sluttHaandtering());
-        statuspanel.add(new JLabel(""));
         statuspanel.add(antLevende); statuspanel.add(generasjon);
         statuspanel.add(start); statuspanel.add(avslutt);
-        statuspanel.add(new JLabel(""));
     }
 
     public void oppdaterAntLevende(int nyttAntall) {
