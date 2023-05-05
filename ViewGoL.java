@@ -50,8 +50,8 @@ public class ViewGoL {
 
     private void opprettAllePaneler() {
         hovedpanel = lagPanelMedBorderLayout();
-        statuspanel = lagPanelMedGridLayout(1, 6, 40);
-        rutenett = lagPanelMedGridLayout(antRad, antKol, 0);
+        statuspanel = lagPanelMedGridLayout(1, 6);
+        rutenett = lagPanelMedGridLayout(antRad, antKol);
         hovedpanel.add(statuspanel, BorderLayout.NORTH);
         hovedpanel.add(rutenett, BorderLayout.SOUTH);
         vindu.add(hovedpanel);
@@ -63,13 +63,9 @@ public class ViewGoL {
         return panel;
     }
 
-    private JPanel lagPanelMedGridLayout(int antRad, int antKol, int stoerrelse) {
+    private JPanel lagPanelMedGridLayout(int antRad, int antKol) {
         JPanel panel = new JPanel();
-        if(stoerrelse == 0) {
-            panel.setLayout(new GridLayout(antRad, antKol));
-        } else {
-            panel.setLayout(new GridLayout(antRad, antKol, stoerrelse, stoerrelse));
-        }
+        panel.setLayout(new GridLayout(antRad, antKol));
         return panel;
     }
 
