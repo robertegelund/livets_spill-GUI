@@ -14,19 +14,13 @@ public class ViewGoL {
         this.controller = controller;
         this.antRad = antRad; this.antKol = antKol;
         knapper = new Celleknapp[antRad][antKol];
-
         vindu = lagVindu("Game of Life");
-        hovedpanel = lagPanelMedBorderLayout();
-        statuspanel = lagPanelMedGridLayout(1, 4);
-        rutenett = lagPanelMedGridLayout(antRad, antKol);
         
+        opprettAllePaneler();
         fyllStatuspanel();
         lagCelleknapper();
         fyllRutenettPanelMedStartinfo();
 
-        hovedpanel.add(statuspanel, BorderLayout.NORTH);
-        hovedpanel.add(rutenett, BorderLayout.SOUTH);
-        vindu.add(hovedpanel);
         vindu.pack();
         vindu.setLocationRelativeTo(null);
         vindu.setVisible(true);
@@ -54,6 +48,16 @@ public class ViewGoL {
         }
     }
 
+    private void opprettAllePaneler() {
+        hovedpanel = lagPanelMedBorderLayout();
+        statuspanel = lagPanelMedGridLayout(1, 4);
+        rutenett = lagPanelMedGridLayout(antRad, antKol);
+
+        hovedpanel.add(statuspanel, BorderLayout.NORTH);
+        hovedpanel.add(rutenett, BorderLayout.SOUTH);
+        vindu.add(hovedpanel);
+    }
+
     private JPanel lagPanelMedBorderLayout() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -68,7 +72,7 @@ public class ViewGoL {
 
     private void fyllStatuspanel() {
         antLevende = new JLabel("# levende: --");
-        generasjon = new JLabel("Generasjon: --");
+        generasjon = new JLabel("Generasjon #: --");
         start = new JButton("Start"); avslutt = new JButton("Avslutt");
         start.addActionListener(new startHaandtering());
         avslutt.addActionListener(new sluttHaandtering());
@@ -81,7 +85,7 @@ public class ViewGoL {
     }
 
     public void oppdaterGenerasjon(int nesteGenerasjon) {
-        generasjon.setText("Generasjon: " + Integer.toString(nesteGenerasjon));
+        generasjon.setText("Generasjon #: " + Integer.toString(nesteGenerasjon));
     }
 
     private void fyllRutenettPanelMedStartinfo() {

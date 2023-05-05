@@ -1,6 +1,6 @@
 class ModelGoL {
-    int antRader, antKolonner;
-    Celle[][] rutene;
+    private int antRader, antKolonner;
+    private Celle[][] rutene;
 
     ModelGoL(int antRader, int antKolonner) {
         this.antRader = antRader;

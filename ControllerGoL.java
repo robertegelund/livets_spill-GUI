@@ -1,9 +1,10 @@
 class ControllerGoL {
     private ModelGoL model; ViewGoL view;
-    private int genNr = 0;
+    private int genNr = 0, antRad, antKol;
     private boolean spilletKjoerer = false;
 
     ControllerGoL(int antRad, int antKol) {
+        this.antRad = antRad; this.antKol = antKol;
         model = new ModelGoL(antRad, antKol);
         model.fyllMedTilfeldigeCeller();
         model.kobleAlleCeller();
@@ -15,8 +16,8 @@ class ControllerGoL {
     }
 
     public void oppdatering() {
-        for(int rad = 0; rad < model.antRader; rad++) {
-            for(int kol = 0; kol < model.antKolonner; kol++) {
+        for(int rad = 0; rad < antRad; rad++) {
+            for(int kol = 0; kol < antKol; kol++) {
                 Celle celle = model.hentCelle(rad, kol);
                 celle.tellLevendeNaboer();
                 celle.oppdaterStatus();
