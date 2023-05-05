@@ -44,8 +44,11 @@ class ControllerGoL {
     }
     
     public void startSpillet() {
-        spilletKjoerer = true;
-        new Thread(new BrettOppdaterer()).start();
+        if(!spilletKjoerer) {
+            spilletKjoerer = true;
+            new Thread(new BrettOppdaterer()).start();
+            view.visCelleknapper();
+        }
     }
 
     public void avsluttSpillet() {

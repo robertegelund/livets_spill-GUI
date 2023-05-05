@@ -22,7 +22,8 @@ public class ViewGoL {
         
         fyllStatuspanel();
         lagCelleknapper(); 
-        visCelleknapper();
+        rutenett.setPreferredSize(new Dimension(50*antRad, 50*antKol));
+        rutenett.add(new JLabel("Trykk Start for aa starte Game of Life!"));
 
         hovedpanel.add(statuspanel, BorderLayout.NORTH);
         hovedpanel.add(rutenett, BorderLayout.SOUTH);
@@ -90,10 +91,12 @@ public class ViewGoL {
         }
     }
 
-    private void visCelleknapper() {
+    public void visCelleknapper() {
         for(int i = 0; i < antRad; i++) {
             for(int j = 0; j < antKol; j++) {
-                rutenett.add(knapper[i][j]);
+                Celleknapp knapp = knapper[i][j];
+                knapp.setPreferredSize(new Dimension(50, 50));
+                rutenett.add(knapp);
             }
         }
     }
@@ -105,6 +108,7 @@ public class ViewGoL {
     class startHaandtering implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            rutenett.removeAll();
             controller.startSpillet();
         }
     }
