@@ -10,10 +10,6 @@ class ControllerGoL {
         view = new ViewGoL(this, antRader, antKolonner);
     }
 
-    public Celle[][] hentRutene() {
-        return model.hentRutene();
-    }
-
     public int antallLevende() {
         return model.antallLevende();
     }
@@ -27,8 +23,24 @@ class ControllerGoL {
             }
         }
         genNr++;
-        view.oppdaterAntLevende();
+        view.oppdaterAntLevende(antallLevende());
         view.oppdaterRutenett(); 
+    }
+
+    public void oppdaterCellestatus(int rad, int kol) {
+        Celle celle = model.hentCelle(rad, kol);
+        if(celle.erLevende()) {
+            celle.settDoed();
+            view.endreCelleknappTegn(".", rad, kol);
+        } else {
+            celle.settLevende();
+            view.endreCelleknappTegn("O", rad, kol);    
+        }
+        view.oppdaterAntLevende(antallLevende());
+    }
+
+    public String hentStatustegnCelle(int rad, int kol) {
+        return model.hentCelle(rad, kol).hentStatusTegn();
     }
     
     public void startSpillet() {
@@ -40,6 +52,7 @@ class ControllerGoL {
         spilletKjoerer = false;
         System.exit(0);
     }
+    
     class BrettOppdaterer implements Runnable {
         @Override
         public void run() {

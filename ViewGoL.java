@@ -13,7 +13,7 @@ public class ViewGoL {
     ViewGoL(ControllerGoL controller, int antRad, int antKol) {
         this.controller = controller;
         this.antRad = antRad; this.antKol = antKol;
-        knapper =  new Celleknapp[antRad][antKol];
+        knapper = new Celleknapp[antRad][antKol];
 
         vindu = lagVindu("Game of Life");
         hovedpanel = lagPanelMedBorderLayout();
@@ -21,7 +21,7 @@ public class ViewGoL {
         rutenett = lagPanelMedGridLayout(antRad, antKol);
         
         fyllStatuspanel();
-        lagCelleknapper(controller.hentRutene()); 
+        lagCelleknapper(); 
         visCelleknapper();
 
         hovedpanel.add(statuspanel, BorderLayout.NORTH);
@@ -49,13 +49,13 @@ public class ViewGoL {
     public void oppdaterRutenett() {
         for(int i = 0; i < antRad; i++) {
             for(int j = 0; j < antKol; j++) {
-                knapper[i][j].setText(controller.hentRutene()[i][j].hentStatusTegn());
+                knapper[i][j].setText(controller.hentStatustegnCelle(i, j));
             }
         }
     }
 
-    public void oppdaterAntLevende() {
-        antLevende.setText(Integer.toString(controller.antallLevende()));
+    public void oppdaterAntLevende(int nyttAntall) {
+        antLevende.setText("Antall levende: " + Integer.toString(nyttAntall));
     }
 
     private JPanel lagPanelMedBorderLayout() {
@@ -79,10 +79,13 @@ public class ViewGoL {
         statuspanel.add(start); statuspanel.add(avslutt);
     }
 
-    private void lagCelleknapper(Celle[][] rutene) {
+    private void lagCelleknapper() {
         for(int i = 0; i < antRad; i++) {
             for(int j = 0; j < antKol; j++) {
-                knapper[i][j] = new Celleknapp(rutene[i][j].hentStatusTegn(), i, j);
+                knapper[i][j] = new Celleknapp(
+                    controller.hentStatustegnCelle(i, j), 
+                    i, j
+                );
             }
         }
     }
@@ -93,6 +96,10 @@ public class ViewGoL {
                 rutenett.add(knapper[i][j]);
             }
         }
+    }
+
+    public void endreCelleknappTegn(String nyttStatustegn, int rad, int kol) {
+        knapper[rad][kol].setText(nyttStatustegn);
     }
 
     class startHaandtering implements ActionListener {
@@ -112,24 +119,16 @@ public class ViewGoL {
     class Celleknapp extends JButton {
         int rad, kolonne;
 
-        Celleknapp(String tekst, int rad, int kolonne) {
+        Celleknapp(String tekst, int rad, int kol) {
             super(tekst);
-            this.rad = rad; this.kolonne = kolonne;
+            this.rad = rad; this.kolonne = kol;
             this.addActionListener(new actionListenerCelleknapp());
         }
 
         class actionListenerCelleknapp implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Celle celle = controller.hentRutene()[rad][kolonne];
-                if(celle.erLevende()) {
-                    celle.settDoed();
-                    Celleknapp.this.setText(".");
-                } else {
-                    celle.settLevende();
-                    Celleknapp.this.setText("O");
-                }
-                oppdaterAntLevende();
+                controller.oppdaterCellestatus(rad, kolonne);
             }
         }
     }
