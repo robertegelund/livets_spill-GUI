@@ -1,6 +1,9 @@
 class Hovedprogram {
     public static void main(String[] args) {
-        new ControllerGoL(10, 10);
+        if(args.length != 0) {
+            new ControllerGoL(Integer.valueOf(args[0]), Integer.valueOf(args[1]));
+        } else {
+            new ControllerGoL(10, 10);
+        }
     }
-        
 }

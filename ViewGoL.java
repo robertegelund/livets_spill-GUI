@@ -6,7 +6,7 @@ import javax.swing.*;
 public class ViewGoL {
     ControllerGoL controller;
     JFrame vindu; JPanel hovedpanel, rutenett, statuspanel;
-    JButton start, avslutt; JLabel antLevende;
+    JButton start, avslutt; JLabel antLevende; JLabel generasjon;
     int antRad, antKol;
     Celleknapp[][] knapper; 
 
@@ -17,18 +17,18 @@ public class ViewGoL {
 
         vindu = lagVindu("Game of Life");
         hovedpanel = lagPanelMedBorderLayout();
-        statuspanel = lagPanelMedGridLayout(1, 3);
+        statuspanel = lagPanelMedGridLayout(1, 4);
         rutenett = lagPanelMedGridLayout(antRad, antKol);
         
         fyllStatuspanel();
-        lagCelleknapper(); 
-        rutenett.setPreferredSize(new Dimension(50*antRad, 50*antKol));
-        rutenett.add(new JLabel("Trykk Start for aa starte Game of Life!"));
+        lagCelleknapper();
+        fyllRutenettPanelMedStartinfo();
 
         hovedpanel.add(statuspanel, BorderLayout.NORTH);
         hovedpanel.add(rutenett, BorderLayout.SOUTH);
         vindu.add(hovedpanel);
         vindu.pack();
+        vindu.setLocationRelativeTo(null);
         vindu.setVisible(true);
     }
 
@@ -43,7 +43,6 @@ public class ViewGoL {
 
         JFrame vindu = new JFrame(navn);
         vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vindu.setLocationRelativeTo(null);
         return vindu;
     }
 
@@ -53,10 +52,6 @@ public class ViewGoL {
                 knapper[i][j].setText(controller.hentStatustegnCelle(i, j));
             }
         }
-    }
-
-    public void oppdaterAntLevende(int nyttAntall) {
-        antLevende.setText("Antall levende: " + Integer.toString(nyttAntall));
     }
 
     private JPanel lagPanelMedBorderLayout() {
@@ -72,12 +67,26 @@ public class ViewGoL {
     }
 
     private void fyllStatuspanel() {
-        antLevende = new JLabel("Antall levende: " + controller.antallLevende());
+        antLevende = new JLabel("# levende: --");
+        generasjon = new JLabel("Generasjon: --");
         start = new JButton("Start"); avslutt = new JButton("Avslutt");
         start.addActionListener(new startHaandtering());
         avslutt.addActionListener(new sluttHaandtering());
-        statuspanel.add(antLevende);
+        statuspanel.add(antLevende); statuspanel.add(generasjon);
         statuspanel.add(start); statuspanel.add(avslutt);
+    }
+
+    public void oppdaterAntLevende(int nyttAntall) {
+        antLevende.setText("# levende: " + Integer.toString(nyttAntall));
+    }
+
+    public void oppdaterGenerasjon(int nesteGenerasjon) {
+        generasjon.setText("Generasjon: " + Integer.toString(nesteGenerasjon));
+    }
+
+    private void fyllRutenettPanelMedStartinfo() {
+        rutenett.setPreferredSize(new Dimension(50*antRad, 50*antKol));
+        rutenett.add(new JLabel("Trykk Start for aa starte Game of Life!"));
     }
 
     private void lagCelleknapper() {
@@ -108,7 +117,6 @@ public class ViewGoL {
     class startHaandtering implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            rutenett.removeAll();
             controller.startSpillet();
         }
     }
@@ -135,5 +143,9 @@ public class ViewGoL {
                 controller.oppdaterCellestatus(rad, kolonne);
             }
         }
+    }
+
+    public void toemRutenettPanel() {
+        rutenett.removeAll();
     }
 }
