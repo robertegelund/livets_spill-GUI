@@ -48,6 +48,8 @@ class ControllerGoL {
             view.toemRutenettPanel();
             view.visCelleknapper();
             new Thread(new BrettOppdaterer()).start();
+        } else {
+            spilletKjoerer = false;
         }
     }
 
@@ -59,6 +61,7 @@ class ControllerGoL {
     class BrettOppdaterer implements Runnable {
         @Override
         public void run() {
+            System.out.println("Oppdatering til neste generasjoner kjoerer...");
             int spillrunde = 0;
             while(spilletKjoerer) {
                 if(spillrunde != 0) {
@@ -75,6 +78,7 @@ class ControllerGoL {
                 }
                 spillrunde++;
             }
+            System.out.println("Oppdatering til neste generasjoner er pauset...");
         }
     }
 
